@@ -50,6 +50,11 @@ namespace ArticlesAppApi.Utilities
             {
                 pageSize = MaxPageSize;
             }
+
+            if (pageSize < 1)
+            {
+                pageSize = 1;
+            }
         }
 
         /// <summary>

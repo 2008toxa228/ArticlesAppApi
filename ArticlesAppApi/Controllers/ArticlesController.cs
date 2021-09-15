@@ -179,15 +179,16 @@ namespace ArticlesAppApi.Controllers
         /// <summary>
         /// Обновляет параметры статьи по казанному идентификатору и переданным параметрам в JSON формате.
         /// </summary>
-        /// <param name="id">Идентификатор статьи.</param>
-        /// <param name="articleJson">JSON представление статьи с измененными параметрами.</param>
         /// <returns>Результат обновления статьи.</returns>
-        public bool UpdateArticleById(Guid id, string articleJson)
+        [HttpPost]
+        public bool UpdateArticleById()
         {
             // ToDo rewrite catch block.
             try
             {
+                var articleJson = Request.Content.ReadAsStringAsync().Result;
                 var article = JsonConvert.DeserializeObject<Article>(articleJson);
+                var id = article.Id;
 
                 return dataBaseProviderFactory
                     .GetDataBaseProvider()
@@ -197,7 +198,6 @@ namespace ArticlesAppApi.Controllers
             {
                 return false;
             }
-
         }
     }
 }
